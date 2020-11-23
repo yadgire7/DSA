@@ -1,0 +1,327 @@
+Q. what is data structure?
+a data structure (DS) is a way of organing data in a useful manner so that it can be used efficiently.
+
+Abstract Data Type(ADT):
+		ADT is an abstraction of a DS which provides interface to which a DS must adhere(stick to).
+		
+example:
+
+ADT				Implementation
+list				dynamic array
+				linked list
+
+queue			linked list based queue
+				array based queue	
+				stack based queue
+
+map				tree map
+				hashmap
+
+
+**recurrence relation**
+	- finding the relation between terms of a sequence in generalised from
+	- ex.: 1. fibonacci series- F(n)=F(n-1) + F(n-2)	2. Tower of Hanoi- F(n)= 2F(n-1)+1
+
+**complexity analysis:(Big O)**
+
+Big-O notation:
+	it gives the upper bound of the complexity in the worst case which helps in analysing the performance of the code.
+Theta Notation: Average case complexity
+Omega Notation: Best case complexity	
+**Array DS:**
+
+-static array is a fixed length container containing n elements 'indexible' from zero to n-1(both inclusive.)
+
+>> 1D Array
+	1. elements can be inserted at any position.
+	2. insertion at the particular position = O(n)
+	3. deletion from a particular position = O(n)
+>> 2D Array (array of arrays)
+	1. representation: datatype name[rows][columns]
+	2. indexing from 0
+	3. accessing an element: a[row_no][col_no] (indexing from 0)
+	4. initialising at compile time: 
+		row-wise representation
+		int a[2][3]={1,2,3,4,5,6} ~ 1	2	3
+									4	5	6
+	5. declaring row size is optional but declaring column size is necessary.
+	6. insertion at run time: O(n^2)
+	7. row major :
+		a[i][j]= B + ((i*n)+j)*size
+		where,
+			B=base addr.
+			m=no. of rows
+			n=no. of columns
+	 		size=memory consumed by datatype
+	8. column major:
+
+**spase matrix:
+	- matrix with very few non-zero entries.
+	- triplet representation:
+		1. need: to save memory/space
+		2. rows		columns		value
+			5			6		  6
+			this first row of representation shows no. of rows, columns and no. of non zero entries.
+			following rows represent row no., column no. and the non-zero value at that position
+			
+**saddle point:
+	- element in the matrix which is minimumin row and max. in column		  
+**Linked list DS**
+
+- collection of distinct elements similar to array but not in contiguous memory locations.
+- linked list is a dynamic DS.
+- It uses the concept of pointer to store data
+- extra memory is required for pointer but this is feasible as compared to static size declaration of arrays.
+- accessing= O(n)
+- memory requirement is less in array as compared to linked list. (for small datatype)
+- memory utilisation is more efficient in linked list as compared to array
+- Insert at beg. =O(1)
+- insert at end = O(n)
+- insert at pos. = O(n)
+
+**Stack DS**
+
+	- follows LIFO principle (Last In First Out)
+	- insertion and deletion is possible from one end only.
+	- ex.: CD stand
+	- insertion = push
+	- deletion = pop
+	- insertion and deletion occurs from top of stack
+	- operations: 
+		push()	=O(1) for array Implementation
+		pop()	=O(1) for array Implementation
+		peek()
+		isEmpty()
+	- applications:	
+		reversing string
+		undo operation in text editor
+		recurssion
+		parenthesis check
+		infix to postfix
+		tower of hanoy problem
+
+	*Implementation of stack using array:
+		- push = O(1)
+		- pop = O(1)
+	*Implementation of stack using linked list:
+		- push  with insertion from beg.: O(1)
+		- pop with deletion from beg. : O(1)
+		- push  with insertion at end.: O(n)
+		- pop with deletion from end : O(n)
+
+	*Infix, prefix, postfix expressions:
+		precedence order of infix expressions:
+			1. (),{},[]
+			2. ^ -> right to left
+			3. *,/ -> left to right
+			4. +,- -> left to right
+		
+		prefix: <operator> <operand> <operand>
+
+		postfix: <operand <operand> <operator>
+
+	* infix to postfix:
+	1.  print operands as they arrive
+	2. if stack is empty or contians a left parenthesis on top, push the incoming operator onto the stack
+	3. if incoming symbol is '(' , push onto stack
+	4. if incoming symbol is ')' , pop the stack and print the operators until left parenthesis is found.
+	5. if incoming symbol has higher precedence than the top of the stack then push it on the stack
+	6. if incoming symbol has lower precedence than the top of the stack, pop and print the top of stack, then test the incoming symbol with the new top.
+	7. if incoming symbol has equal precedence to the top of the stack, use 'associativity rules'.
+	8. at the end of the expression, print all operators of the stack.
+
+	*associativity rules:
+		1. L to R , then pop and print the top and then push the incoming operator
+		2. R to L , then push the incoming operator
+
+	* infix to prefix:
+		1. reverse the expression
+		2. if incoming character is operand, print it
+		3. if operator and stack is empty, push onto stack
+		4. if operator has higher precedence, push it onto stack
+		5. if precedence is equal and associativity is L to R, push onto stack
+		6. if operator has ')' push onto stack
+		7. if top is ')' push incoming operator
+		8. if incoming operator is '(' pop and print until ')' is found 
+		9. if precedence of incoming operator is less than top of the stack, pop and print
+		10. if expression is complete, pop the stack
+		11. do not forget to everse the expression again.
+
+
+**Queue DS**
+	- follows FIFO principle (First In First Out)
+	- insertion(enque) is performed from one end(rear)
+	- deletion(deque) is performed from another end(front)
+	- basic operations:
+		1. enque(insert)	
+		2. deque(deletion)	
+		3. front(returns front element)
+		4. isFull()
+		5. isEmpty
+	applications:
+		1. storing multiple requests
+		2. 
+
+	*queue Implementation using array:
+		1. enque=O(1)
+		2. deque=O(1)
+	*queue Implementation using linked list:
+		1. enque=O(n)
+		2. deque=O(1)
+
+**Circular queue DS**
+	- more efficient as compared to simple queue.
+	- memory utilisation is more than normal queue
+	- bool isFull(){
+		if((rear+1)%size==front)
+			return true;
+		else	
+			return false;
+	}
+	- isEmpty(){
+		if(rear==-1&&front==-1)
+			return true;
+		else return false;
+	}
+
+	- void enque(int data){
+		rear=(rear+1)%size;
+		queue[rear]=data;
+	}
+
+	- void deque(){
+		if(isEmpty())
+			cout<<"underflow";
+		else if(front==rear)
+			front=rear=-1;
+		else{
+			front=(front+1)%size;
+		}
+	}
+
+**Greedy algorithm**
+	- a problem solving approach that follows approach of making the locally optimal choice at each stage with the hope of finding optimum solution
+	- pros: simple, easy to implement, fast execution
+	- cons: sometimes it does not provide optimum solution
+	- applications:
+		1. activity selection problem
+		2. huffman coding
+		3. job sequencing problem
+		4. fractional knapsack problem
+		5. prim's minimum spanning tree	
+
+	1. activity selection problem:
+	statement: given n activities with their start and end times. select the maximum number of activities that can be performed by a single person, assuming that a person can work on a single activity at a time.
+	algorithm:
+		1. sort the activities according to finish time.
+		2. print the first activity after sorting
+		3. select the activity which has starting time greater than or equal to finish time of pev. activity
+		time complexity: O(nlog(n))
+	
+	2. fractional knapsack problem:
+		1. calculate value/weight ratio for each bag
+		2. add the one with the maximum ratio
+		3. if wt. exceeds the max. capacity then add a faction of it
+		time complexity: O(n(logn))
+	
+
+	**Searching and sorting algorithm**
+	*searching:
+	1. Linear
+	2. Binary
+	3. Sentinel
+	4. fibonacci
+
+	*sorting:
+	1. bubble sort
+	2. insertion sort
+	3. selection sort
+	4. quick sort
+	5. heap sort
+	6. shell sort
+	7. radix sort
+
+
+	*Linear Search:(sequential search)
+		- simplest searching algo.(easy to code)
+		- worst case complexity=O(n)
+		- best=O(1)
+
+	*Binary Search:
+		- best searching algo.
+		- requirement: array should be sorted.
+		- uses divide and conquer strategy
+		- worst case complexity=O(log(n))
+		- best=O(1)
+
+	**fibonacci search
+		- uses divide and conquer strategy
+		- elements should be sorted
+		- complexity=O(log n)
+	*Bubble sort:
+		- swapping is done
+		- worst case=O(n^2);
+		- best=O(n)
+
+	*Insertion sort
+		- take unsorted array
+		- divide array into sorted and unsorted arrray
+		- a[0]=sorted,a[1] to a[n-1]=unsorted
+		- check element in unsorted array- if it is less than element in sorted array 
+		- move the sorted element to right and check again, if greater , place it after that element else continue with above step
+		- worst case=O(n^2)
+		- best case=O(n)
+
+	*Selection sort:
+		- take unsorted array
+		- divide array into sorted and unsorted arrray
+		- NULL=sorted,a[0] to a[n-1]=unsorted
+		- compare smallest element with first element of unsorted array, swap with first element of unsorted array
+		- best and worst=O(n^2)
+
+	*Quick sort: 
+		- divide and conquer 
+		- take unsorted array
+		- choose a pivot element(can choose any)
+		- first=pivot element
+		- partition is a recursive function
+		- worst=O(n^2)
+		- best/avg.=O(n(logn))
+
+	*Merge Sort:
+		- divide and conquer 
+		- divide list into sublist and sort until sublist of size 1 are created
+		- merge all sublists
+		- merge(a[],lb,mid,ub){
+			i=lb;
+			j=mid+1;
+			k=lb;
+			while(i<=mid&&j<=ub){
+				if(a[i]<=a[j]){
+					b[k]=a[i];
+					i++;
+					k++;
+				}
+
+				else{
+					b[k]=a[j];
+					j++;
+					k++;
+				}
+			}
+			if(i>mid){
+				while(j<=ub){
+					b[k]=a[j];
+					k++;
+					j++;
+				}
+			}
+			else{
+				while(i<=mid){
+					b[k]=a[i];
+					i++;
+					k++;
+				}
+			}
+			print b[];
+		}
